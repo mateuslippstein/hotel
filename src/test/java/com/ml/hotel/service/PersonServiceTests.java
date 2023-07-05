@@ -3,7 +3,6 @@ package com.ml.hotel.service;
 import com.ml.hotel.exception.DuplicatedDocumentException;
 import com.ml.hotel.model.Person;
 import com.ml.hotel.repository.PersonRepository;
-import com.ml.hotel.service.PersonService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
