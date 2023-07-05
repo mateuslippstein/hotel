@@ -1,5 +1,6 @@
 package com.ml.hotel.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,5 +21,8 @@ public class Person {
     private String firstName;
     private String lastName;
     private String email;
+    
+    @Column(unique = true)
+    private String document;
 
 }

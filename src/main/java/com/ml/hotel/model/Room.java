@@ -1,8 +1,6 @@
 package com.ml.hotel.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import lombok.Getter;
@@ -14,10 +12,11 @@ import lombok.Setter;
 public class Room {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; //Room number
 
     private int singleBeds;
-    private int coupleBeds;
+    private int doubleBeds;
+    private boolean arConditioning;
+    private String observation;
 
 }

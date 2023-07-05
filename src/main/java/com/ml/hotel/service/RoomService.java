@@ -28,19 +28,15 @@ public class RoomService {
     }
 
     public Room createRoom(Room room) {
-        // You can add any additional business logic/validation before saving the room
         return roomRepository.save(room);
     }
 
     public Room updateRoom(Long id, Room updatedRoom) {
         Room room = getRoomById(id);
 
-        // Update the properties of the existing room
         room.setSingleBeds(updatedRoom.getSingleBeds());
-        room.setCoupleBeds(updatedRoom.getCoupleBeds());
-        // Update any other properties as needed
+        room.setDoubleBeds(updatedRoom.getDoubleBeds());
 
-        // Save the updated room
         return roomRepository.save(room);
     }
 

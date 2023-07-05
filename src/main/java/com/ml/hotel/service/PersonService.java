@@ -1,8 +1,10 @@
 package com.ml.hotel.service;
 
+import com.ml.hotel.exception.DuplicatedDocumentException;
 import com.ml.hotel.model.Person;
 import com.ml.hotel.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -28,20 +30,20 @@ public class PersonService {
     }
 
     public Person createPerson(Person person) {
-        // You can add any additional business logic/validation before saving the person
-        return personRepository.save(person);
+        try {
+            return personRepository.save(person);
+        } catch (DataIntegrityViolationException e) {
+            throw new DuplicatedDocumentException("Document already exists: " + person.getDocument());
+        }
     }
 
     public Person updatePerson(Long id, Person updatedPerson) {
         Person person = getPersonById(id);
 
-        // Update the properties of the existing person
         person.setFirstName(updatedPerson.getFirstName());
         person.setLastName(updatedPerson.getLastName());
         person.setEmail(updatedPerson.getEmail());
-        // Update any other properties as needed
 
-        // Save the updated person
         return personRepository.save(person);
     }
 
