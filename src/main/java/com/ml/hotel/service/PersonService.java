@@ -20,15 +20,34 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
+    /**
+     * Retrieves all persons.
+     *
+     * @return a list of all persons.
+     */
     public List<Person> getAllPersons() {
         return personRepository.findAll();
     }
 
+    /**
+     * Retrieves a person by their ID.
+     *
+     * @param id the ID of the person to retrieve.
+     * @return the person with the specified ID.
+     * @throws EntityNotFoundException if the person with the given ID does not exist.
+     */
     public Person getPersonById(Long id) {
         return personRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Person not found with id: " + id));
     }
 
+    /**
+     * Creates a new person.
+     *
+     * @param person the person to create.
+     * @return the created person.
+     * @throws DuplicatedDocumentException if a person with the same document already exists.
+     */
     public Person createPerson(Person person) {
         try {
             return personRepository.save(person);
@@ -37,6 +56,14 @@ public class PersonService {
         }
     }
 
+    /**
+     * Updates an existing person.
+     *
+     * @param id            the ID of the person to update.
+     * @param updatedPerson the updated person information.
+     * @return the updated person.
+     * @throws EntityNotFoundException if the person with the given ID does not exist.
+     */
     public Person updatePerson(Long id, Person updatedPerson) {
         Person person = getPersonById(id);
 
@@ -47,6 +74,12 @@ public class PersonService {
         return personRepository.save(person);
     }
 
+    /**
+     * Deletes a person by their ID.
+     *
+     * @param id the ID of the person to delete.
+     * @throws EntityNotFoundException if the person with the given ID does not exist.
+     */
     public void deletePerson(Long id) {
         Person person = getPersonById(id);
         personRepository.delete(person);

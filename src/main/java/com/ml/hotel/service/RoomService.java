@@ -18,19 +18,45 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
+    /**
+     * Retrieves all rooms.
+     *
+     * @return a list of all rooms.
+     */
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
     }
 
+    /**
+     * Retrieves a room by its ID.
+     *
+     * @param id the ID of the room to retrieve.
+     * @return the room with the specified ID.
+     * @throws EntityNotFoundException if the room with the given ID does not exist.
+     */
     public Room getRoomById(Long id) {
         return roomRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Room not found with id: " + id));
     }
 
+    /**
+     * Creates a new room.
+     *
+     * @param room the room to create.
+     * @return the created room.
+     */
     public Room createRoom(Room room) {
         return roomRepository.save(room);
     }
 
+    /**
+     * Updates an existing room.
+     *
+     * @param id          the ID of the room to update.
+     * @param updatedRoom the updated room information.
+     * @return the updated room.
+     * @throws EntityNotFoundException if the room with the given ID does not exist.
+     */
     public Room updateRoom(Long id, Room updatedRoom) {
         Room room = getRoomById(id);
 
@@ -40,6 +66,12 @@ public class RoomService {
         return roomRepository.save(room);
     }
 
+    /**
+     * Deletes a room by its ID.
+     *
+     * @param id the ID of the room to delete.
+     * @throws EntityNotFoundException if the room with the given ID does not exist.
+     */
     public void deleteRoom(Long id) {
         Room room = getRoomById(id);
         roomRepository.delete(room);
