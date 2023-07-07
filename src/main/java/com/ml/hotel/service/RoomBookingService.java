@@ -14,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class RoomBookingService {
@@ -63,7 +66,7 @@ public class RoomBookingService {
             Long personId = updatedRoomBooking.getPerson().getId();
 
             if (personId == null) {
-                throw new IllegalArgumentException("Room ID and Person ID must be provided");
+                throw new IllegalArgumentException("Person ID must be provided");
             }
 
             Person person = personRepository.findById(personId)
@@ -78,21 +81,30 @@ public class RoomBookingService {
 
     public List<RoomBooking> getRoomBookingsByDate(LocalDate date) {
         List<RoomBooking> roomBookings = roomBookingRepository.findByDate(date);
-        if (roomBookings.isEmpty()) {
-            List<Room> rooms = roomRepository.findAll();
+        List<Room> rooms = roomRepository.findAll();
 
-            for (Room room : rooms) {
-                RoomBooking roomBooking = new RoomBooking();
-                roomBooking.setDate(date);
-                roomBooking.setRoom(room);
-                roomBooking.setPerson(null);
-                roomBooking.setStatus(RoomStatusEnum.AVAILABLE);
+        // Create a mapping of existing room bookings by room ID
+        Map<Long, RoomBooking> roomBookingMap = roomBookings.stream()
+                .collect(Collectors.toMap(rb -> rb.getRoom().getId(), rb -> rb));
 
-                roomBookings.add(roomBooking);
+        // Create a new list to store the modified room bookings
+        List<RoomBooking> updatedRoomBookings = new ArrayList<>();
+
+        for (Room room : rooms) {
+            if (roomBookingMap.containsKey(room.getId())) {
+                updatedRoomBookings.add(roomBookingMap.get(room.getId()));
+            } else {
+                RoomBooking dummyRoomBooking = new RoomBooking();
+                dummyRoomBooking.setDate(date);
+                dummyRoomBooking.setRoom(room);
+                dummyRoomBooking.setPerson(null);
+                dummyRoomBooking.setStatus(RoomStatusEnum.AVAILABLE);
+
+                updatedRoomBookings.add(dummyRoomBooking);
             }
         }
 
-        return roomBookings;
+        return updatedRoomBookings;
     }
 
 }
