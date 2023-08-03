@@ -34,6 +34,15 @@ public class RoomBookingService {
         this.personRepository = personRepository;
     }
 
+    /**
+     * Creates a new room booking in the database after validating the provided data.
+     *
+     * @param roomBooking The room booking object to be created.
+     * @return The created room booking.
+     * @throws IllegalArgumentException if the room ID, person ID, or date is not provided, or if
+     *                                  a booking already exists for the given date and room.
+     * @throws EntityNotFoundException   if the room or person with the provided IDs does not exist in the database.
+     */
     public RoomBooking createRoomBooking(RoomBooking roomBooking) {
         Long roomId = roomBooking.getRoom().getId();
         Long personId = roomBooking.getPerson().getId();
@@ -47,7 +56,6 @@ public class RoomBookingService {
         Person person = personRepository.findById(personId)
                 .orElseThrow(() -> new EntityNotFoundException("Person not found with id: " + personId));
 
-        // Check if a Room Booking already exists for the given date and room
         LocalDate date = roomBooking.getDate();
         List<RoomBooking> existingRoomBookings = roomBookingRepository.findByDateAndRoom(date, room);
         if (!existingRoomBookings.isEmpty()) {
@@ -60,6 +68,15 @@ public class RoomBookingService {
         return roomBookingRepository.save(roomBooking);
     }
 
+    /**
+     * Updates an existing room booking in the database.
+     *
+     * @param id             The ID of the room booking to be updated.
+     * @param updatedRoomBooking The updated room booking information.
+     * @return The updated room booking if it exists, otherwise null.
+     * @throws IllegalArgumentException if the person ID is not provided.
+     * @throws EntityNotFoundException   if the room booking or person with the provided ID does not exist in the database.
+     */
     public RoomBooking updateRoomBooking(Long id, RoomBooking updatedRoomBooking) {
         RoomBooking roomBooking = roomBookingRepository.findById(id).orElse(null);
         if (roomBooking != null) {
@@ -79,15 +96,20 @@ public class RoomBookingService {
         return null;
     }
 
+    /**
+     * Retrieves a list of room bookings for a specific date, including dummy room bookings
+     * for rooms without existing bookings on that date.
+     *
+     * @param date The date for which to retrieve room bookings.
+     * @return A list of room bookings for the specified date, including dummy bookings for rooms without existing bookings.
+     */
     public List<RoomBooking> getRoomBookingsByDate(LocalDate date) {
         List<RoomBooking> roomBookings = roomBookingRepository.findByDate(date);
         List<Room> rooms = roomRepository.findAll();
 
-        // Create a mapping of existing room bookings by room ID
         Map<Long, RoomBooking> roomBookingMap = roomBookings.stream()
                 .collect(Collectors.toMap(rb -> rb.getRoom().getId(), rb -> rb));
 
-        // Create a new list to store the modified room bookings
         List<RoomBooking> updatedRoomBookings = new ArrayList<>();
 
         for (Room room : rooms) {
