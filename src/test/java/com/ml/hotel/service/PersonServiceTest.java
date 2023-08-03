@@ -18,7 +18,7 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
-public class PersonServiceTests {
+public class PersonServiceTest {
 
     @Mock
     private PersonRepository personRepository;
