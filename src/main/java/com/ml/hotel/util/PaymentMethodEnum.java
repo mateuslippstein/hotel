@@ -1,13 +1,13 @@
 package com.ml.hotel.util;
 
-public enum PaymentTypeEnum {
+public enum PaymentMethodEnum {
     CREDIT_CARD("Credit Card"),
     DEBIT_CARD("Debit Card"),
     PIX("PIX");
 
     private final String displayName;
 
-    PaymentTypeEnum(String displayName) {
+    PaymentMethodEnum(String displayName) {
         this.displayName = displayName;
     }
 

@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.ml.hotel.util.PaymentTypeEnum;
+import com.ml.hotel.util.PaymentMethodEnum;
 
 @Getter
 @Setter
@@ -24,6 +24,6 @@ public class Payment {
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
-    private PaymentTypeEnum paymentMethod;
+    private PaymentMethodEnum paymentMethod;
 
 }
