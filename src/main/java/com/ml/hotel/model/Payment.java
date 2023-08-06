@@ -18,7 +18,7 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<RoomBooking> roomBookings;
 
     private BigDecimal amount;
