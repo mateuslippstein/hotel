@@ -32,4 +32,8 @@ public class RoomBooking {
     private RoomStatusEnum status;
 
     private BigDecimal price;
+
+    @ManyToOne
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
 }

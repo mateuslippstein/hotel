@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.ml.hotel.util.PaymentTypeEnum;
 
@@ -17,9 +18,8 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "roomBooking_id")
-    private RoomBooking roomBooking;
+    @OneToMany(mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RoomBooking> roomBookings;
 
     private BigDecimal amount;
 
