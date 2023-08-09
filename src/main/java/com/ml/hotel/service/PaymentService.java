@@ -68,5 +68,15 @@ public class PaymentService {
 
         return calculateTotalAmount(roomBookings);
     }
+
+    public BigDecimal getUnpaidAmountByPersonId(Long personId) {
+        List<RoomBooking> roomBookings = roomBookingRepository.findByPersonIdAndStatus(personId, RoomStatusEnum.OCCUPIED);
+        
+        if (roomBookings.isEmpty()) {
+            throw new EntityNotFoundException("No pending payments found for Person ID: " + personId);
+        }
+    
+        return calculateTotalAmount(roomBookings);
+    }
     
 }

@@ -35,16 +35,27 @@ public class PaymentController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @GetMapping("/unpaid-amount")
-    public ResponseEntity<?> getUnpaidAmount(@RequestParam Long roomId){
+    public ResponseEntity<?> getUnpaidAmount(@RequestParam Long roomId) {
         try {
             BigDecimal unpaidAmount = paymentService.getUnpaidAmount(roomId);
             return new ResponseEntity<BigDecimal>(unpaidAmount, HttpStatus.OK);
-        } catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/unpaid-amount-by-person")
+    public ResponseEntity<?> getUnpaidAmountByPersonId(@RequestParam Long personId) {
+        try {
+            BigDecimal unpaidAmount = paymentService.getUnpaidAmountByPersonId(personId);
+            return new ResponseEntity<>(unpaidAmount, HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

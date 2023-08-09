@@ -15,4 +15,5 @@ public interface RoomBookingRepository extends JpaRepository<RoomBooking, Long> 
     List<RoomBooking> findByDate(LocalDate date);
     List<RoomBooking> findByDateAndRoom(LocalDate date, Room room);
     List<RoomBooking> findByRoomIdAndStatus(Long roomId, RoomStatusEnum status);
+    List<RoomBooking> findByPersonIdAndStatus(Long personId, RoomStatusEnum status);
 }
