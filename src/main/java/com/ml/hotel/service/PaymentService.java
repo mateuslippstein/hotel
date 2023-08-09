@@ -30,7 +30,7 @@ public class PaymentService {
         this.roomBookingRepository = roomBookingRepository;
     }
 
-    public BigDecimal calculateTotalAmount(List<RoomBooking> roomBookings) {
+    private BigDecimal calculateTotalAmount(List<RoomBooking> roomBookings) {
         BigDecimal total = BigDecimal.ZERO;
         for (RoomBooking roomBooking : roomBookings) {
             total = total.add(Optional.ofNullable(roomBooking.getPrice()).orElse(DEFAULT_PRICE));
@@ -58,6 +58,15 @@ public class PaymentService {
         }
     
         return paymentRepository.save(payment);
+    }
+
+    public BigDecimal getUnpaidAmount(Long roomId){
+        List<RoomBooking> roomBookings = roomBookingRepository.findByRoomIdAndStatus(roomId, RoomStatusEnum.OCCUPIED);
+        if (roomBookings.isEmpty()) {
+            throw new EntityNotFoundException("No pending payments found for Room ID: " + roomId);
+        }
+
+        return calculateTotalAmount(roomBookings);
     }
     
 }

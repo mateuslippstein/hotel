@@ -6,6 +6,8 @@ import com.ml.hotel.util.PaymentMethodEnum;
 
 import jakarta.persistence.EntityNotFoundException;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,19 @@ public class PaymentController {
         } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @GetMapping("/unpaid-amount")
+    public ResponseEntity<?> getUnpaidAmount(@RequestParam Long roomId){
+        try {
+            BigDecimal unpaidAmount = paymentService.getUnpaidAmount(roomId);
+            return new ResponseEntity<BigDecimal>(unpaidAmount, HttpStatus.OK);
+        } catch (EntityNotFoundException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } 
+        catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
