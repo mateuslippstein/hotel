@@ -60,7 +60,7 @@ public class PaymentService {
         return paymentRepository.save(payment);
     }
 
-    public BigDecimal getUnpaidAmount(Long roomId){
+    public BigDecimal getUnpaidAmountByRoomId(Long roomId){
         List<RoomBooking> roomBookings = roomBookingRepository.findByRoomIdAndStatus(roomId, RoomStatusEnum.OCCUPIED);
         if (roomBookings.isEmpty()) {
             throw new EntityNotFoundException("No pending payments found for Room ID: " + roomId);
