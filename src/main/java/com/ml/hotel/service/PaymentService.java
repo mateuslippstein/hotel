@@ -30,6 +30,12 @@ public class PaymentService {
         this.roomBookingRepository = roomBookingRepository;
     }
 
+    /**
+     * Calculate the total amount for a list of room bookings.
+     *
+     * @param roomBookings The list of room bookings for which the total amount needs to be calculated.
+     * @return The total amount calculated based on the prices of the room bookings.
+     */
     private BigDecimal calculateTotalAmount(List<RoomBooking> roomBookings) {
         BigDecimal total = BigDecimal.ZERO;
         for (RoomBooking roomBooking : roomBookings) {
@@ -39,6 +45,15 @@ public class PaymentService {
         return total;
     }
 
+
+    /**
+     * Create a payment for a given room and payment method.
+     *
+     * @param roomId        The ID of the room for which the payment is being created.
+     * @param paymentMethod The payment method chosen for the payment.
+     * @return The created Payment object.
+     * @throws EntityNotFoundException If no occupied room bookings are found for the given room ID.
+     */
     public Payment createPayment(Long roomId, PaymentMethodEnum paymentMethod) {
         List<RoomBooking> roomBookings = roomBookingRepository.findByRoomIdAndStatus(roomId, RoomStatusEnum.OCCUPIED);
         if (roomBookings.isEmpty()) {
@@ -60,6 +75,14 @@ public class PaymentService {
         return paymentRepository.save(payment);
     }
 
+
+    /**
+     * Get the unpaid amount for a specific room ID.
+     *
+     * @param roomId The ID of the room for which the unpaid amount needs to be retrieved.
+     * @return The unpaid amount for the room.
+     * @throws EntityNotFoundException If no pending payments are found for the given room ID.
+     */
     public BigDecimal getUnpaidAmountByRoomId(Long roomId){
         List<RoomBooking> roomBookings = roomBookingRepository.findByRoomIdAndStatus(roomId, RoomStatusEnum.OCCUPIED);
         if (roomBookings.isEmpty()) {
@@ -69,6 +92,14 @@ public class PaymentService {
         return calculateTotalAmount(roomBookings);
     }
 
+
+    /**
+     * Get the unpaid amount for a specific person ID.
+     *
+     * @param personId The ID of the person for which the unpaid amount needs to be retrieved.
+     * @return The unpaid amount for the person.
+     * @throws EntityNotFoundException If no pending payments are found for the given person ID.
+     */
     public BigDecimal getUnpaidAmountByPersonId(Long personId) {
         List<RoomBooking> roomBookings = roomBookingRepository.findByPersonIdAndStatus(personId, RoomStatusEnum.OCCUPIED);
         
