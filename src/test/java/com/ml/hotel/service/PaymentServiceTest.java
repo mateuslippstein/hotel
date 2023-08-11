@@ -42,6 +42,7 @@ public class PaymentServiceTest {
 
     @Test
     public void testCreatePayment_Success() {
+        // Preare
         Long roomId = 1L;
         PaymentMethodEnum paymentMethod = PaymentMethodEnum.CREDIT_CARD;
 
@@ -56,8 +57,10 @@ public class PaymentServiceTest {
         // argument
         when(paymentRepository.save(any(Payment.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
+        // Execute
         Payment payment = paymentService.createPayment(roomId, paymentMethod);
 
+        // Verify
         assertNotNull(payment);
         assertEquals(paymentMethod, payment.getPaymentMethod());
         assertEquals(BigDecimal.valueOf(50.00), payment.getAmount());
@@ -70,12 +73,14 @@ public class PaymentServiceTest {
 
     @Test
     public void testCreatePayment_NoRoomBookings() {
+        // Prepare
         Long roomId = 1L;
         PaymentMethodEnum paymentMethod = PaymentMethodEnum.CREDIT_CARD;
 
         when(roomBookingRepository.findByRoomIdAndStatus(roomId, RoomStatusEnum.OCCUPIED))
                 .thenReturn(new ArrayList<>());
 
+        // Execute and verify
         assertThrows(EntityNotFoundException.class, () -> paymentService.createPayment(roomId, paymentMethod));
 
         verify(roomBookingRepository, times(1)).findByRoomIdAndStatus(roomId, RoomStatusEnum.OCCUPIED);
