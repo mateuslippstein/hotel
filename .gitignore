@@ -26,6 +26,9 @@ hs_err_pid*
 replay_pid*
 
 # Gradle
+gradle/
+gradle-cache/
+gradle-plugins/
 .gradle/
 build/
 
