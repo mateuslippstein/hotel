@@ -25,12 +25,43 @@ To execute unit tests, use the following command:
 ./gradlew test
 ```
 
-
 ### Debug the Application
 Debugging the application is easy with VS Code:
 1. Open the project in VS Code.
 2. Set breakpoints in your code.
 3. Click the IDE's debugging button to start debugging, and the application will pause at your breakpoints.
+
+## Application properties and Database settings
+The application.properties file contains configuration settings for your Spring Boot application. These settings control various aspects of the application's behavior, including database connection, H2 console access, and more. Below are the key properties and their explanations:
+
+    spring.datasource.url:
+        Specifies the JDBC URL for the database connection.
+        In this case, it's using the H2 database with a file-based storage location at ${user.home}/hotel-database/db. The ${user.home} is a placeholder for the user's home directory.
+        The DB_CLOSE_ON_EXIT=FALSE ensures that the H2 database doesn't close when the application exits, allowing access to the data after the application stops.
+
+    spring.datasource.driverClassName:
+        Specifies the JDBC driver class name for the database connection.
+        Here, it's set to the driver class for the H2 database.
+
+    spring.datasource.username and spring.datasource.password:
+        Specifies the username and password for the database connection.
+        In this case, the default H2 username is used (sa), and there's no password.
+
+    spring.jpa.database-platform:
+        Specifies the Hibernate dialect for the database.
+        This is set to the H2 database dialect.
+
+    spring.h2.console.enabled:
+        Specifies whether the H2 console is enabled.
+        Here, it's set to true, allowing access to the H2 console for database management.
+
+    spring.h2.console.path:
+        Specifies the URL path for accessing the H2 console.
+        In this case, the console can be accessed at /h2-console.
+
+    spring.jpa.hibernate.ddl-auto:
+        Specifies how Hibernate should handle database schema generation.
+        The update value indicates that Hibernate should update the schema if needed.
 
 ## Running the application with Docker
 To build and run the Spring Boot application using Docker, follow these steps:
@@ -59,4 +90,3 @@ Note: Keep in mind that since a local database is used, the data will not be per
 
 By following these steps, you should have the Spring Boot application up and running in a Docker container. Access your application by navigating to http://localhost:8080 in your web browser or making API requests.
 
-## TO DO
