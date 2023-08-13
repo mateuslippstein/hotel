@@ -63,6 +63,12 @@ The application.properties file contains configuration settings for your Spring 
         Specifies how Hibernate should handle database schema generation.
         The update value indicates that Hibernate should update the schema if needed.
 
+### In-momory Database
+To configure H2 to use an in-memory database instead of a disk-based one, you can set:
+```
+spring.datasource.url=jdbc:h2:mem:hotel-database;
+```
+
 ## Running the application with Docker
 To build and run the Spring Boot application using Docker, follow these steps:
 
