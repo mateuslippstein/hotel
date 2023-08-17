@@ -37,14 +37,11 @@ public class PaymentService {
      * @return The total amount calculated based on the prices of the room bookings.
      */
     private BigDecimal calculateTotalAmount(List<RoomBooking> roomBookings) {
-        BigDecimal total = BigDecimal.ZERO;
-        for (RoomBooking roomBooking : roomBookings) {
-            total = total.add(Optional.ofNullable(roomBooking.getPrice()).orElse(DEFAULT_PRICE));
-        }
-    
-        return total;
+        return roomBookings.stream()
+                .map(roomBooking -> roomBooking.getPrice())
+                .map(price -> price != null ? price : DEFAULT_PRICE)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
-
 
     /**
      * Create a payment for a given room and payment method.
