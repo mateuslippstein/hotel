@@ -33,7 +33,8 @@ public class PaymentService {
     /**
      * Calculate the total amount for a list of room bookings.
      *
-     * @param roomBookings The list of room bookings for which the total amount needs to be calculated.
+     * @param roomBookings The list of room bookings for which the total amount
+     *                     needs to be calculated.
      * @return The total amount calculated based on the prices of the room bookings.
      */
     private BigDecimal calculateTotalAmount(List<RoomBooking> roomBookings) {
@@ -46,10 +47,12 @@ public class PaymentService {
     /**
      * Create a payment for a given room and payment method.
      *
-     * @param roomId        The ID of the room for which the payment is being created.
+     * @param roomId        The ID of the room for which the payment is being
+     *                      created.
      * @param paymentMethod The payment method chosen for the payment.
      * @return The created Payment object.
-     * @throws EntityNotFoundException If no occupied room bookings are found for the given room ID.
+     * @throws EntityNotFoundException If no occupied room bookings are found for
+     *                                 the given room ID.
      */
     public Payment createPayment(Long roomId, PaymentMethodEnum paymentMethod) {
         List<RoomBooking> roomBookings = roomBookingRepository.findByRoomIdAndStatus(roomId, RoomStatusEnum.OCCUPIED);
@@ -58,29 +61,25 @@ public class PaymentService {
         }
 
         BigDecimal total = calculateTotalAmount(roomBookings);
-    
-        Payment payment = new Payment();
-        payment.setRoomBookings(roomBookings);
-        payment.setPaymentMethod(paymentMethod);
-        payment.setAmount(total);
 
-        for (RoomBooking roomBooking : roomBookings) {
-            roomBooking.setStatus(RoomStatusEnum.PAID);
-            roomBookingRepository.save(roomBooking);
-        }
-    
+        Payment payment = new Payment(null, roomBookings, total, paymentMethod);
+
+        roomBookings.forEach(roomBooking -> roomBooking.setStatus(RoomStatusEnum.PAID));
+        roomBookingRepository.saveAll(roomBookings);
+
         return paymentRepository.save(payment);
     }
-
 
     /**
      * Get the unpaid amount for a specific room ID.
      *
-     * @param roomId The ID of the room for which the unpaid amount needs to be retrieved.
+     * @param roomId The ID of the room for which the unpaid amount needs to be
+     *               retrieved.
      * @return The unpaid amount for the room.
-     * @throws EntityNotFoundException If no pending payments are found for the given room ID.
+     * @throws EntityNotFoundException If no pending payments are found for the
+     *                                 given room ID.
      */
-    public BigDecimal getUnpaidAmountByRoomId(Long roomId){
+    public BigDecimal getUnpaidAmountByRoomId(Long roomId) {
         List<RoomBooking> roomBookings = roomBookingRepository.findByRoomIdAndStatus(roomId, RoomStatusEnum.OCCUPIED);
         if (roomBookings.isEmpty()) {
             throw new EntityNotFoundException("No pending payments found for Room ID: " + roomId);
@@ -89,22 +88,24 @@ public class PaymentService {
         return calculateTotalAmount(roomBookings);
     }
 
-
     /**
      * Get the unpaid amount for a specific person ID.
      *
-     * @param personId The ID of the person for which the unpaid amount needs to be retrieved.
+     * @param personId The ID of the person for which the unpaid amount needs to be
+     *                 retrieved.
      * @return The unpaid amount for the person.
-     * @throws EntityNotFoundException If no pending payments are found for the given person ID.
+     * @throws EntityNotFoundException If no pending payments are found for the
+     *                                 given person ID.
      */
     public BigDecimal getUnpaidAmountByPersonId(Long personId) {
-        List<RoomBooking> roomBookings = roomBookingRepository.findByPersonIdAndStatus(personId, RoomStatusEnum.OCCUPIED);
-        
+        List<RoomBooking> roomBookings = roomBookingRepository.findByPersonIdAndStatus(personId,
+                RoomStatusEnum.OCCUPIED);
+
         if (roomBookings.isEmpty()) {
             throw new EntityNotFoundException("No pending payments found for Person ID: " + personId);
         }
-    
+
         return calculateTotalAmount(roomBookings);
     }
-    
+
 }
