@@ -66,14 +66,10 @@ public class RoomService {
         return roomRepository.save(room);
     }
 
-    /**
-     * Deletes a room by its ID.
-     *
-     * @param id the ID of the room to delete.
-     * @throws EntityNotFoundException if the room with the given ID does not exist.
-     */
-    public void deleteRoom(Long id) {
+    
+    public Room deleteRoom(Long id) {
         Room room = getRoomById(id);
-        roomRepository.delete(room);
+        room.setIsDeleted(true);
+        return roomRepository.save(room);
     }
 }
