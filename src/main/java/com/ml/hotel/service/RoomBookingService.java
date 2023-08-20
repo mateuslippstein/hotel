@@ -117,11 +117,8 @@ public class RoomBookingService {
             if (roomBookingMap.containsKey(room.getId())) {
                 updatedRoomBookings.add(roomBookingMap.get(room.getId()));
             } else {
-                RoomBooking dummyRoomBooking = new RoomBooking();
-                dummyRoomBooking.setDate(date);
-                dummyRoomBooking.setRoom(room);
-                dummyRoomBooking.setPerson(null);
-                dummyRoomBooking.setStatus(RoomStatusEnum.AVAILABLE);
+                RoomBooking dummyRoomBooking = new RoomBooking(null, date, room, null, RoomStatusEnum.AVAILABLE, null,
+                        null);
 
                 updatedRoomBookings.add(dummyRoomBooking);
             }
