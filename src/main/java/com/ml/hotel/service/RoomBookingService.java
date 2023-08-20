@@ -37,15 +37,15 @@ public class RoomBookingService {
     /**
      * Creates a new room booking in the database after validating the provided data.
      *
-     * @param roomBooking The room booking object to be created.
+     * @param newRoomBooking The room booking object to be created.
      * @return The created room booking.
      * @throws IllegalArgumentException if the room ID, person ID, or date is not provided, or if
      *                                  a booking already exists for the given date and room.
      * @throws EntityNotFoundException   if the room or person with the provided IDs does not exist in the database.
      */
-    public RoomBooking createRoomBooking(RoomBooking roomBooking) {
-        Long roomId = roomBooking.getRoom().getId();
-        Long personId = roomBooking.getPerson().getId();
+    public RoomBooking createRoomBooking(RoomBooking newRoomBooking) {
+        Long roomId = newRoomBooking.getRoom().getId();
+        Long personId = newRoomBooking.getPerson().getId();
 
         if (roomId == null || personId == null) {
             throw new IllegalArgumentException("Room ID and Person ID must be provided");
@@ -56,16 +56,16 @@ public class RoomBookingService {
         Person person = personRepository.findById(personId)
                 .orElseThrow(() -> new EntityNotFoundException("Person not found with id: " + personId));
 
-        LocalDate date = roomBooking.getDate();
+        LocalDate date = newRoomBooking.getDate();
         List<RoomBooking> existingRoomBookings = roomBookingRepository.findByDateAndRoom(date, room);
         if (!existingRoomBookings.isEmpty()) {
             throw new IllegalArgumentException("A Room Booking already exists for the given date and room");
         }
 
-        roomBooking.setRoom(room);
-        roomBooking.setPerson(person);
+        newRoomBooking.setRoom(room);
+        newRoomBooking.setPerson(person);
 
-        return roomBookingRepository.save(roomBooking);
+        return roomBookingRepository.save(newRoomBooking);
     }
 
     /**
