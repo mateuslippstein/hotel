@@ -78,7 +78,8 @@ public class RoomBookingService {
      * @throws EntityNotFoundException   if the room booking or person with the provided ID does not exist in the database.
      */
     public RoomBooking updateRoomBooking(Long id, RoomBooking updatedRoomBooking) {
-        RoomBooking roomBooking = roomBookingRepository.findById(id).orElse(null);
+        RoomBooking roomBooking = roomBookingRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("RoomBooking not found with id: " + id));
         if (roomBooking != null) {
             Long personId = updatedRoomBooking.getPerson().getId();
 
