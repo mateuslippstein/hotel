@@ -1,9 +1,9 @@
 name: Build and Test Developer branch
 on:
     push: 
-        branches: [ 'developer ']
+        branches: [ "developer" ]
     pull_request: 
-        branches: [ 'developer' ]
+        branches: [ "developer" ]
 
 jobs:
     build-and-test:
