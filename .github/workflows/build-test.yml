@@ -4,7 +4,7 @@ on:
   workflow_call: 
     inputs:
       branch:
-        description: 'Branch name that this job will run'
+        description: 'Branch name that this workflow will run'
         required: true
         type: string
 
@@ -13,12 +13,11 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - name: Print branch name
-      run: echo ${{ inputs.branch }}
+      run: echo Running build and test for branch ${{ inputs.branch }}
     - name: Checkout Code
       uses: actions/checkout@v3
     - name: Set up JDK 17

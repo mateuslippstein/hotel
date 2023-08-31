@@ -7,6 +7,7 @@ on:
 
 jobs:
     build-and-test:
+        name: "Build and Test Developer branch"
         uses: ./.github/workflows/build-test.yml
         with:
             branch: "developer"
