@@ -1,0 +1,10 @@
+name: Build and Test Developer branch
+on:
+    push: 
+        branches: [ 'developer ']
+    pull_request: 
+        branches: [ 'developer' ]
+
+jobs:
+    build-and-test:
+        uses: ./.github/workflows/build-test.yml
