@@ -36,3 +36,8 @@ jobs:
       with:
         name: build
         path: build
+    - name: Upload artifact Dockerfile
+      uses: actions/upload-artifact@v3
+      with:
+        name: Dockerfile
+        path: /Dockerfile
