@@ -11,3 +11,8 @@ jobs:
         uses: ./.github/workflows/build-test.yml
         with:
             branch: "developer"
+    deploy-image:
+        name: "Build and push docker image"
+        uses: ./.github/workflows/deploy-image.yml
+        with:
+            branch: "developer"
