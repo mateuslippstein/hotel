@@ -15,6 +15,7 @@ jobs:
         name: "Build and push docker image"
         uses: ./.github/workflows/deploy-image.yml
         permissions:
+            contents: read
             packages: write
         with:
             branch: "developer"
