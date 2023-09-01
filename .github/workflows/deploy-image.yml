@@ -25,6 +25,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: build
+          path: build/
       - name: Download Dockerfile artifact
         uses: actions/download-artifact@v3
         with:
