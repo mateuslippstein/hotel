@@ -1,0 +1,13 @@
+name: Developer branch workflow
+on:
+    push: 
+        branches: [ "developer" ]
+    pull_request: 
+        branches: [ "developer" ]
+
+jobs:
+    build-and-test:
+        name: "Build and Test developer branch"
+        uses: ./.github/workflows/build-test.yml
+        with:
+            branch: "developer"
