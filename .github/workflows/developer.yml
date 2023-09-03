@@ -1,4 +1,4 @@
-name: Build and Test Developer branch
+name: Developer branch workflow
 on:
     push: 
         branches: [ "developer" ]
@@ -7,16 +7,7 @@ on:
 
 jobs:
     build-and-test:
-        name: "Build and Test Developer branch"
+        name: "Build and Test developer branch"
         uses: ./.github/workflows/build-test.yml
-        with:
-            branch: "developer"
-    deploy-image:
-        name: "Build and push docker image"
-        uses: ./.github/workflows/deploy-image.yml
-        needs: build-and-test
-        permissions:
-            contents: read
-            packages: write
         with:
             branch: "developer"
