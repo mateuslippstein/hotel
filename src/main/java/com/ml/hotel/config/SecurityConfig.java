@@ -34,20 +34,19 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http.csrf().disable()
-				.authorizeHttpRequests()
-				.requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
-				.and()
-				.authorizeHttpRequests().requestMatchers("/auth/user/**").authenticated()
-				.and()
-				.authorizeHttpRequests().requestMatchers("/auth/admin/**").authenticated()
-				.and()
-				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and()
-				.authenticationProvider(authenticationProvider())
-				.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-				.build();
+		return http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests()
+                .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
+                .and()
+                .authorizeHttpRequests().requestMatchers("/auth/user/**").authenticated()
+                .and()
+                .authorizeHttpRequests().requestMatchers("/auth/admin/**").authenticated()
+                .and()
+                .sessionManagement(management -> management
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
 		
 	}
 
