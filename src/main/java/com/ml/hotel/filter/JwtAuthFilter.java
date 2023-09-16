@@ -18,7 +18,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-// This class helps us to validate the generated jwt token
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
 
@@ -31,15 +30,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		String authHeader = request.getHeader("Authorization");
-		String bypassParam = request.getParameter("bypassAuth");
 		String token = null;
 		String username = null;
-
-		if (bypassParam != null && bypassParam.equals("true")) {
-            // Allow the request without authentication
-            filterChain.doFilter(request, response);
-            return;
-        }
 
 		if (authHeader != null && authHeader.startsWith("Bearer ")) {
 			token = authHeader.substring(7);
