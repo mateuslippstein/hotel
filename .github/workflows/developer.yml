@@ -1,7 +1,5 @@
 name: Developer branch workflow
 on:
-    push: 
-        branches: [ "developer" ]
     pull_request: 
         branches: [ "developer" ]
 
