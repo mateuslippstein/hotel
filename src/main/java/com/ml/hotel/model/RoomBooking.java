@@ -2,16 +2,15 @@ package com.ml.hotel.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.ml.hotel.util.RoomStatusEnum;
 
-@NoArgsConstructor @AllArgsConstructor @Getter @Setter
+@Data @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class RoomBooking {
 

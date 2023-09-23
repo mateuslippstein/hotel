@@ -2,16 +2,15 @@ package com.ml.hotel.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import com.ml.hotel.util.PaymentMethodEnum;
 
-@AllArgsConstructor @NoArgsConstructor @Getter @Setter
+@Data @AllArgsConstructor @NoArgsConstructor
 @Entity
 public class Payment {
 
