@@ -1,0 +1,11 @@
+name: Master branch workflow
+on:
+    pull_request: 
+        branches: [ "master" ]
+
+jobs:
+    build-and-test:
+        name: "Build and Test master branch"
+        uses: ./.github/workflows/build-test.yml
+        with:
+            branch: "master"
