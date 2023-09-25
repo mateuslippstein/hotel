@@ -7,7 +7,6 @@ import com.ml.hotel.repository.room.RoomBookingRepository;
 import com.ml.hotel.util.PaymentMethodEnum;
 import com.ml.hotel.util.RoomStatusEnum;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,7 +19,6 @@ public class PaymentService {
 
     private static final BigDecimal DEFAULT_PRICE = new BigDecimal("99.00");
 
-    @Autowired
     public PaymentService(PaymentRepository paymentRepository, RoomBookingRepository roomBookingRepository) {
         this.paymentRepository = paymentRepository;
         this.roomBookingRepository = roomBookingRepository;
