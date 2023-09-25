@@ -3,12 +3,8 @@ package com.ml.hotel.controller;
 import com.ml.hotel.model.Payment;
 import com.ml.hotel.service.PaymentService;
 import com.ml.hotel.util.PaymentMethodEnum;
-
 import jakarta.persistence.EntityNotFoundException;
-
 import java.math.BigDecimal;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +15,6 @@ public class PaymentController {
 
     private final PaymentService paymentService;
 
-    @Autowired
     public PaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;
     }

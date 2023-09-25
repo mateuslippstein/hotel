@@ -1,18 +1,14 @@
 package com.ml.hotel.service;
 
 import com.ml.hotel.model.Person;
-import com.ml.hotel.model.Room;
-import com.ml.hotel.model.RoomBooking;
+import com.ml.hotel.model.room.Room;
+import com.ml.hotel.model.room.RoomBooking;
 import com.ml.hotel.repository.PersonRepository;
-import com.ml.hotel.repository.RoomBookingRepository;
-import com.ml.hotel.repository.RoomRepository;
+import com.ml.hotel.repository.room.RoomBookingRepository;
+import com.ml.hotel.repository.room.RoomRepository;
 import com.ml.hotel.util.RoomStatusEnum;
-
 import jakarta.persistence.EntityNotFoundException;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +22,6 @@ public class RoomBookingService {
     private final RoomRepository roomRepository;
     private final PersonRepository personRepository;
 
-    @Autowired
     public RoomBookingService(RoomBookingRepository roomBookingRepository, RoomRepository roomRepository,
             PersonRepository personRepository) {
         this.roomBookingRepository = roomBookingRepository;

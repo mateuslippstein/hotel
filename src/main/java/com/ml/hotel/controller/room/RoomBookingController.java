@@ -1,13 +1,11 @@
-package com.ml.hotel.controller;
+package com.ml.hotel.controller.room;
 
-import com.ml.hotel.model.RoomBooking;
+import com.ml.hotel.model.room.RoomBooking;
 import com.ml.hotel.service.RoomBookingService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,7 +15,6 @@ public class RoomBookingController {
 
     private final RoomBookingService roomBookingService;
 
-    @Autowired
     public RoomBookingController(RoomBookingService roomBookingService) {
         this.roomBookingService = roomBookingService;
     }

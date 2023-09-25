@@ -1,9 +1,9 @@
 package com.ml.hotel.service;
 
 import com.ml.hotel.model.Payment;
-import com.ml.hotel.model.RoomBooking;
+import com.ml.hotel.model.room.RoomBooking;
 import com.ml.hotel.repository.PaymentRepository;
-import com.ml.hotel.repository.RoomBookingRepository;
+import com.ml.hotel.repository.room.RoomBookingRepository;
 import com.ml.hotel.util.PaymentMethodEnum;
 import com.ml.hotel.util.RoomStatusEnum;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,13 +12,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
 import jakarta.persistence.EntityNotFoundException;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
