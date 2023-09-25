@@ -1,4 +1,4 @@
-package com.ml.hotel.model;
+package com.ml.hotel.model.room;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.ml.hotel.model.Payment;
+import com.ml.hotel.model.Person;
 import com.ml.hotel.util.RoomStatusEnum;
 
 @Data @NoArgsConstructor @AllArgsConstructor

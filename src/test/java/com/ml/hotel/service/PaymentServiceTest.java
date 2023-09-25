@@ -1,9 +1,9 @@
 package com.ml.hotel.service;
 
 import com.ml.hotel.model.Payment;
-import com.ml.hotel.model.RoomBooking;
+import com.ml.hotel.model.room.RoomBooking;
 import com.ml.hotel.repository.PaymentRepository;
-import com.ml.hotel.repository.RoomBookingRepository;
+import com.ml.hotel.repository.room.RoomBookingRepository;
 import com.ml.hotel.util.PaymentMethodEnum;
 import com.ml.hotel.util.RoomStatusEnum;
 import org.junit.jupiter.api.BeforeEach;

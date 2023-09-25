@@ -1,4 +1,4 @@
-package com.ml.hotel.model;
+package com.ml.hotel.model.room;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

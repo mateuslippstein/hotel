@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.ml.hotel.model.room.RoomBooking;
 import com.ml.hotel.util.PaymentMethodEnum;
 
 @Data @AllArgsConstructor @NoArgsConstructor

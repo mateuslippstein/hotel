@@ -9,8 +9,9 @@ import java.util.Optional;
 
 import jakarta.persistence.EntityNotFoundException;
 
-import com.ml.hotel.model.Room;
-import com.ml.hotel.repository.RoomRepository;
+import com.ml.hotel.model.room.Room;
+import com.ml.hotel.repository.room.RoomRepository;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

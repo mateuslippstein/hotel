@@ -1,6 +1,6 @@
-package com.ml.hotel.controller;
+package com.ml.hotel.controller.room;
 
-import com.ml.hotel.model.Room;
+import com.ml.hotel.model.room.Room;
 import com.ml.hotel.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

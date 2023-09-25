@@ -1,7 +1,8 @@
 package com.ml.hotel.service;
 
-import com.ml.hotel.model.Room;
-import com.ml.hotel.repository.RoomRepository;
+import com.ml.hotel.model.room.Room;
+import com.ml.hotel.repository.room.RoomRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

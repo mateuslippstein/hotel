@@ -1,6 +1,6 @@
-package com.ml.hotel.controller;
+package com.ml.hotel.controller.room;
 
-import com.ml.hotel.model.RoomBooking;
+import com.ml.hotel.model.room.RoomBooking;
 import com.ml.hotel.service.RoomBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
