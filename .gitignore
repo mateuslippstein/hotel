@@ -49,3 +49,6 @@ build.lock
 
 # External configuration (if used)
 /config/application.yml
+
+# Application properties
+application.properties
