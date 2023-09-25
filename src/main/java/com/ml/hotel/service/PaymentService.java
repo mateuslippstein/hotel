@@ -6,15 +6,11 @@ import com.ml.hotel.repository.PaymentRepository;
 import com.ml.hotel.repository.room.RoomBookingRepository;
 import com.ml.hotel.util.PaymentMethodEnum;
 import com.ml.hotel.util.RoomStatusEnum;
-
 import jakarta.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PaymentService {
