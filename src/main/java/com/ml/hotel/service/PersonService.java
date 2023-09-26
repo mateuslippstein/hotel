@@ -3,10 +3,8 @@ package com.ml.hotel.service;
 import com.ml.hotel.exception.DuplicatedDocumentException;
 import com.ml.hotel.model.Person;
 import com.ml.hotel.repository.PersonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 
@@ -15,7 +13,6 @@ public class PersonService {
 
     private final PersonRepository personRepository;
 
-    @Autowired
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }

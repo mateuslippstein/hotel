@@ -1,12 +1,10 @@
-package com.ml.hotel.repository;
+package com.ml.hotel.repository.room;
 
-import com.ml.hotel.model.Room;
-import com.ml.hotel.model.RoomBooking;
+import com.ml.hotel.model.room.Room;
+import com.ml.hotel.model.room.RoomBooking;
 import com.ml.hotel.util.RoomStatusEnum;
-
 import java.time.LocalDate;
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

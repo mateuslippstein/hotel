@@ -1,12 +1,10 @@
-package com.ml.hotel.controller;
+package com.ml.hotel.controller.room;
 
-import com.ml.hotel.model.Room;
+import com.ml.hotel.model.room.Room;
 import com.ml.hotel.service.RoomService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -15,7 +13,6 @@ public class RoomController {
 
     private final RoomService roomService;
 
-    @Autowired
     public RoomController(RoomService roomService) {
         this.roomService = roomService;
     }
