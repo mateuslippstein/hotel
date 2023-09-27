@@ -69,6 +69,21 @@ To configure H2 to use an in-memory database instead of a disk-based one, you ca
 spring.datasource.url=jdbc:h2:mem:hotel-database;
 ```
 
+## Authentication
+
+The application utilizes JWT (JSON Web Token) authentication. Before making API calls, you must generate a valid token. There are three endpoints with no authentication:
+
+1. Welcome:
+        "/auth/welcome": This endpoint is designed for testing purposes to validate the authentication process.
+
+2. Create a New User:
+        "/auth/addNewUser": You can use this endpoint to create a new user, which will be used to generate the necessary tokens for authentication.
+
+3. Generate Authentication Token:
+        "/auth/generateToken": This self-explanatory endpoint receives the necessary credentials (created on /auth/addNewUser) to generate the authentication token required for accessing authenticated endpoints.
+
+Make sure to generate and include a valid token before attempting to access authenticated endpoints.
+
 ## Running the application with Docker
 To build and run the Spring Boot application using Docker, follow these steps:
 
