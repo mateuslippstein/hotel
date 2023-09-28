@@ -2,11 +2,11 @@
 This repository serves as an educational resource for practicing, studying, and testing various programming concepts. <br>
 Please note that it is not intended for real-world applications but instead emulates a simple Hotel Reservation app.
 
-- [Basic requirements and instruction ](#basic-requirements-and-instructions)
+- [Basic requirements and instructions](#basic-requirements-and-instructions)
     - [Running the Application](#running-the-application)
     - [Running Unit Tests](#runing-unit-tests)
     - [Debug the Application](#debug-the-application)
-- [Application properties and Database settins](#application-properties-and-database-settings)
+- [Application properties and Database settings](#application-properties-and-database-settings)
     - [In-memory database](#in-memory-database)
 - [Authentication](#authentication)
 - [Running the application with Docker](#running-the-application-with-docker)
