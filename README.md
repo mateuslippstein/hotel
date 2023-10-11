@@ -72,6 +72,12 @@ The application.properties file contains configuration settings for your Spring 
         Specifies how Hibernate should handle database schema generation.
         The update value indicates that Hibernate should update the schema if needed.
 
+    spring.main.allow-circular-references:
+        Controls whether circular references between beans are allowed in the application context.
+        Setting it to true enables the application to tolerate circular references. 
+        This means Spring Boot will not throw exceptions when circular references are detected. 
+    
+
 ### In-memory Database
 To configure H2 to use an in-memory database instead of a disk-based one, you can set:
 ```
