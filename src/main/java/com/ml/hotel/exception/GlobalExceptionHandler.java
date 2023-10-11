@@ -15,28 +15,28 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DuplicatedDocumentException.class)
     public ResponseEntity<ErrorResponse> handleDuplicatedDocumentException(DuplicatedDocumentException ex) {
         ErrorResponse errorResponse = new ErrorResponse("Duplicated Document", ex.getMessage());
-        logger.info("Duplicated Document", errorResponse);
+        logger.warn("Duplicated Document - {}", errorResponse.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException ex) {
         ErrorResponse errorResponse = new ErrorResponse("Illegal Argument", ex.getMessage());
-        logger.info("Illegal Argument", errorResponse);
+        logger.warn("Illegal Argument - {}", errorResponse.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleEntityNotFoundException(EntityNotFoundException ex){
         ErrorResponse errorResponse = new ErrorResponse("Entity was not found", ex.getMessage());
-        logger.info("Entity Not Found", errorResponse);
+        logger.warn("Entity Not Found - {}", errorResponse.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<ErrorResponse> handleNullPointerException(NullPointerException ex){
         ErrorResponse errorResponse = new ErrorResponse("Null operation", ex.getMessage());
-        logger.info("Null Pointer", errorResponse);
+        logger.error("Null Pointer - {}", errorResponse.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 }
